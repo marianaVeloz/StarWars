@@ -113,6 +113,16 @@ ngOnInit() {
     }
 
     // Naves
-
+    this.swapi.getStarshipById(id).subscribe({
+      next: (s) => {
+        this.starship = s;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.errorMessage = 'No se encontró la nave con ese ID.';
+      }
+    });
+    
   }
 }

@@ -1,13 +1,13 @@
 <!-- Código HTML -->
  <div class="container">
 
-  <h1>Star Wars Finder (Teaching)</h1>
+  <h1>Star Wars </h1>
 
   <!-- SELECTOR DE SECCIÓN -->
 
   <div class="form">
 
-    <label>Section:</label>
+    <label>Selección:</label>
 
     <select [(ngModel)]="section" (change)="updatePlaceholder()">
 
@@ -59,7 +59,7 @@
   </p>
 
 
-  <!-- PEOPLE CARD -->
+  <!-- Personajes -->
 
   <div *ngIf="person" class="card">
 
@@ -82,7 +82,7 @@
   </div>
 
 
-  <!-- PLANET CARD -->
+  <!-- Planeta -->
 
   <div *ngIf="planet" class="card">
 
@@ -103,7 +103,7 @@
   </div>
 
 
-  <!-- STARSHIP CARD -->
+  <!-- Naves -->
 
   <div *ngIf="starship" class="card">
 
@@ -124,7 +124,7 @@
   </div>
 
 
-  <!-- ENDPOINT INFO -->
+  <!-- Endpoint info -->
 
   <p class="note">
 
