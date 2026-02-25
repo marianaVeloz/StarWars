@@ -1,41 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class SwapiService {
-    //URL de API Star Wars
-  private apiUrl = 'https://www.swapi.tech/api';
+
+  private baseUrl = 'https://swapi.dev/api';
+  private cache = new Map<string, any>();
 
   constructor(private http: HttpClient) {}
 
-  //Se piden los datos por id y se devuelven los resultados de la API
-   
-  // Personajes
-  getPersonById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/people/${id}`).pipe(
-      map(res => res.result.properties)
+  private getWithCache(url: string): Observable<any> {
+
+    if (this.cache.has(url)) {
+      return of(this.cache.get(url));
+    }
+
+    return this.http.get(url).pipe(
+      tap(data => this.cache.set(url, data))
     );
   }
 
-  // Planetas
-  getPlanetById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/planets/${id}`).pipe(
-      map(res => res.result.properties)
-    );
+  getPersonById(id: number) {
+    return this.getWithCache(`${this.baseUrl}/people/${id}`);
   }
 
-  // Naves
-  getStarshipById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/starships/${id}`).pipe(
-      map(res => res.result.properties)
-    );
+  getPlanetById(id: number) {
+    return this.getWithCache(`${this.baseUrl}/planets/${id}`);
   }
 
-  // Para resolver la URL del planeta (homeworld)
-  getPlanetByUrl(url: string): Observable<any> {
-    return this.http.get<any>(url).pipe(
-      map(res => res.result.properties)
-    );
+  getStarshipById(id: number) {
+    return this.getWithCache(`${this.baseUrl}/starships/${id}`);
   }
+
+  getPlanetByUrl(url: string) {
+    return this.getWithCache(url);
+  }
+
 }

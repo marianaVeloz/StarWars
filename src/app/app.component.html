@@ -1,1 +1,140 @@
 <!-- Código HTML -->
+ <div class="container">
+
+  <h1>Star Wars Finder (Teaching)</h1>
+
+  <!-- SELECTOR DE SECCIÓN -->
+
+  <div class="form">
+
+    <label>Section:</label>
+
+    <select [(ngModel)]="section">
+
+      <option value="people">People</option>
+
+      <option value="planets">Planets</option>
+
+      <option value="starships">Starships</option>
+
+    </select>
+
+  </div>
+
+
+  <!-- BUSQUEDA -->
+
+  <div class="form">
+
+    <label for="cid">ID:</label>
+
+    <input
+      id="cid"
+      type="number"
+      min="1"
+      [(ngModel)]="characterId"
+      (keyup.enter)="load()" />
+
+    <button (click)="load()" [disabled]="loading">
+
+      Buscar
+
+    </button>
+
+  </div>
+
+
+  <!-- LOADING -->
+
+  <p *ngIf="loading">Cargando...</p>
+
+
+  <!-- ERROR -->
+
+  <p *ngIf="errorMessage" class="error">
+
+    {{ errorMessage }}
+
+  </p>
+
+
+  <!-- PEOPLE CARD -->
+
+  <div *ngIf="person" class="card">
+
+    <div class="info">
+
+      <h2>{{ person.name }}</h2>
+
+      <p><b>Gender:</b> {{ person.gender }}</p>
+
+      <p><b>Height:</b> {{ person.height }}</p>
+
+      <p><b>Mass:</b> {{ person.mass }}</p>
+
+      <p><b>Hair Color:</b> {{ person.hair_color }}</p>
+
+      <p><b>Planet:</b> {{ homeworldName }}</p>
+
+    </div>
+
+  </div>
+
+
+  <!-- PLANET CARD -->
+
+  <div *ngIf="planet" class="card">
+
+    <div class="info">
+
+      <h2>{{ planet.name }}</h2>
+
+      <p><b>Climate:</b> {{ planet.climate }}</p>
+
+      <p><b>Terrain:</b> {{ planet.terrain }}</p>
+
+      <p><b>Population:</b> {{ planet.population }}</p>
+
+      <p><b>Gravity:</b> {{ planet.gravity }}</p>
+
+    </div>
+
+  </div>
+
+
+  <!-- STARSHIP CARD -->
+
+  <div *ngIf="starship" class="card">
+
+    <div class="info">
+
+      <h2>{{ starship.name }}</h2>
+
+      <p><b>Model:</b> {{ starship.model }}</p>
+
+      <p><b>Manufacturer:</b> {{ starship.manufacturer }}</p>
+
+      <p><b>Passengers:</b> {{ starship.passengers }}</p>
+
+      <p><b>Speed:</b> {{ starship.max_atmosphering_speed }}</p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ENDPOINT INFO -->
+
+  <p class="note">
+
+    Endpoint:
+
+    <span class="mono">
+
+      GET https://www.swapi.tech/api/{{section}}/{{ '{' }}id{{ '}' }}
+
+    </span>
+
+  </p>
+
+</div>

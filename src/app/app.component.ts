@@ -71,8 +71,22 @@ export class AppComponent {
       return;
     }
 
-    //Planetas
-  
-    //Naves
+//Planeta
+    if (this.section === 'planets') {
+      this.swapi.getPlanetById(id).subscribe({
+        next: (pl) => {
+          this.planet = pl;
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+          this.errorMessage = 'No se encontró el planeta con ese ID.';
+        }
+      });
+      return;
+    }
+
+    // Naves
+
   }
 }
