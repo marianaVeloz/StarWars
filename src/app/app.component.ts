@@ -24,8 +24,30 @@ export class AppComponent {
   starship: any = null;
 
   homeworldName = '';
+  placeholderText: string = 'Ej: 1 (Luke Skywalker)';
 
   constructor(private swapi: SwapiService) {}
+
+  clearInput() {
+  this.characterId = null;
+}
+  
+  updatePlaceholder() {
+  if (this.section === 'people') {
+    this.placeholderText = 'Ej: 1 (Luke Skywalker)';
+  }
+  else if (this.section === 'planets') {
+    this.placeholderText = 'Ej: 3 (Yavin IV)';
+  }
+  else if (this.section === 'starships') {
+    this.placeholderText = 'Ej: 9 (Death Star)';
+  }
+}
+
+
+ngOnInit() {
+  this.updatePlaceholder();
+}
 
   // Coincide con el HTML: lo busca load()
   load() {
@@ -62,10 +84,12 @@ export class AppComponent {
           }
 
           this.loading = false;
+          this.clearInput();
         },
         error: () => {
           this.loading = false;
           this.errorMessage = 'No se encontró el personaje con ese ID.';
+          this.clearInput();
         }
       });
       return;
@@ -77,10 +101,12 @@ export class AppComponent {
         next: (pl) => {
           this.planet = pl;
           this.loading = false;
+          this.clearInput();
         },
         error: () => {
           this.loading = false;
           this.errorMessage = 'No se encontró el planeta con ese ID.';
+          this.clearInput();
         }
       });
       return;
