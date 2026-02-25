@@ -27,7 +27,7 @@ export class AppComponent {
 
   constructor(private swapi: SwapiService) {}
 
-  // Coincide con el HTML: (keyup.enter)="load()" y (click)="load()"
+  // Coincide con el HTML: lo busca load()
   load() {
     this.errorMessage = '';
     this.loading = true;
@@ -40,12 +40,14 @@ export class AppComponent {
 
     const id = Number(this.characterId);
 
+    //Buscar por id
     if (!id || id < 1) {
       this.loading = false;
       this.errorMessage = 'Ingresa un ID válido (>= 1).';
       return;
     }
-
+    
+    // Personaje
     if (this.section === 'people') {
       this.swapi.getPersonById(id).subscribe({
         next: (p) => {
@@ -69,30 +71,8 @@ export class AppComponent {
       return;
     }
 
-    if (this.section === 'planets') {
-      this.swapi.getPlanetById(id).subscribe({
-        next: (pl) => {
-          this.planet = pl;
-          this.loading = false;
-        },
-        error: () => {
-          this.loading = false;
-          this.errorMessage = 'No se encontró el planeta con ese ID.';
-        }
-      });
-      return;
-    }
-
-    // starships
-    this.swapi.getStarshipById(id).subscribe({
-      next: (s) => {
-        this.starship = s;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'No se encontró la nave con ese ID.';
-      }
-    });
+    //Planetas
+  
+    //Naves
   }
 }
