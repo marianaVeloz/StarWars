@@ -1,141 +1,67 @@
-<!-- Código HTML -->
- <div class="container">
-
-  <h1>Star Wars </h1>
-
-  <!-- SELECTOR DE SECCIÓN -->
+<!-- <div class="container">
+  <h1>Registro de producto</h1>
 
   <div class="form">
-
-    <label>Selección:</label>
-
-    <select [(ngModel)]="section" (change)="updatePlaceholder()">
-
-      <option value="people">Personajes</option>
-
-      <option value="planets">Planetas</option>
-
-      <option value="starships">Naves estelares</option>
-
-    </select>
-
-  </div>
-
-
-  <!-- BUSQUEDA -->
-
-  <div class="form">
-
-    <label for="cid">ID:</label>
-
+    <label for="title">Título:</label>
     <input
-      id="cid"
+      id="title"
+      type="text"
+      [(ngModel)]="producto.title"
+      placeholder="Ej: Camisa negra"
+    >
+
+    <label for="price">Precio:</label>
+    <input
+      id="price"
       type="number"
-      min="1"
-      [(ngModel)]="characterId"
-      [placeholder]="placeholderText"
-      (keyup.enter)="load()" />
+      [(ngModel)]="producto.price"
+      placeholder="Ej: 350"
+    >
 
-    <button (click)="load()" [disabled]="loading">
+    <label for="description">Descripción:</label>
+    <textarea
+      id="description"
+      [(ngModel)]="producto.description"
+      placeholder="Describe el producto"
+    ></textarea>
 
-      Buscar
+    <label for="image">Imagen URL:</label>
+    <input
+      id="image"
+      type="text"
+      [(ngModel)]="producto.image"
+      placeholder="https://..."
+    >
 
+    <label for="category">Categoría:</label>
+    <input
+      id="category"
+      type="text"
+      [(ngModel)]="producto.category"
+      placeholder="Ej: Maquillaje"
+    >
+
+    <button (click)="guardarProducto()" [disabled]="loading">
+      {{ loading ? 'Guardando...' : 'Guardar producto' }}
     </button>
-
   </div>
 
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
 
-  <!-- LOADING -->
-
-  <p *ngIf="loading">Cargando...</p>
-
-
-  <!-- ERROR -->
-
-  <p *ngIf="errorMessage" class="error">
-
-    {{ errorMessage }}
-
-  </p>
-
-
-  <!-- Personajes -->
-
-  <div *ngIf="person" class="card">
-
+  <div class="card" *ngIf="respuesta">
     <div class="info">
-
-      <h2>{{ person.name }}</h2>
-
-      <p><b>Gender:</b> {{ person.gender }}</p>
-
-      <p><b>Height:</b> {{ person.height }}</p>
-
-      <p><b>Mass:</b> {{ person.mass }}</p>
-
-      <p><b>Hair Color:</b> {{ person.hair_color }}</p>
-
-      <p><b>Planet:</b> {{ homeworldName }}</p>
-
+      <p><b>ID:</b> {{ respuesta.id }}</p>
+      <p><b>Título:</b> {{ respuesta.title }}</p>
+      <p><b>Precio:</b> {{ respuesta.price }}</p>
+      <p><b>Descripción:</b> {{ respuesta.description }}</p>
+      <p><b>Imagen:</b> {{ respuesta.image }}</p>
+      <p><b>Categoría:</b> {{ respuesta.category }}</p>
     </div>
-
   </div>
-
-
-  <!-- Planeta -->
-
-  <div *ngIf="planet" class="card">
-
-    <div class="info">
-
-      <h2>{{ planet.name }}</h2>
-
-      <p><b>Climate:</b> {{ planet.climate }}</p>
-
-      <p><b>Terrain:</b> {{ planet.terrain }}</p>
-
-      <p><b>Population:</b> {{ planet.population }}</p>
-
-      <p><b>Gravity:</b> {{ planet.gravity }}</p>
-
-    </div>
-
-  </div>
-
-
-  <!-- Naves -->
-
-  <div *ngIf="starship" class="card">
-
-    <div class="info">
-
-      <h2>{{ starship.name }}</h2>
-
-      <p><b>Model:</b> {{ starship.model }}</p>
-
-      <p><b>Manufacturer:</b> {{ starship.manufacturer }}</p>
-
-      <p><b>Passengers:</b> {{ starship.passengers }}</p>
-
-      <p><b>Speed:</b> {{ starship.max_atmosphering_speed }}</p>
-
-    </div>
-
-  </div>
-
-
-  <!-- Endpoint info -->
 
   <p class="note">
-
     Endpoint:
-
-    <span class="mono">
-
-      GET https://www.swapi.tech/api/{{section}}/{{ '{' }}id{{ '}' }}
-
-    </span>
-
+    <span class="mono">POST https://fakestoreapi.com/products</span>
   </p>
-
-</div>
+</div> -->
